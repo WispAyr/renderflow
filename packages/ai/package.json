@@ -1,0 +1,40 @@
+{
+  "name": "@renderflow/ai",
+  "version": "0.1.0",
+  "description": "RenderFlow AI provider abstraction and prompt engineering",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./providers": {
+      "import": "./dist/providers/index.js",
+      "types": "./dist/providers/index.d.ts"
+    },
+    "./prompt": {
+      "import": "./dist/prompt/index.js",
+      "types": "./dist/prompt/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src/",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@renderflow/core": "workspace:*",
+    "openai": "^4.52.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0",
+    "@types/node": "^20.14.0"
+  },
+  "peerDependencies": {
+    "@renderflow/core": "workspace:*"
+  }
+}
