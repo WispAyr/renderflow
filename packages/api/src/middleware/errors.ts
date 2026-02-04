@@ -1,12 +1,12 @@
 import { Context, Next } from 'hono';
 import { HTTPException } from 'hono/http-exception';
-import type { StatusCode } from 'hono/utils/http-status';
+import type { ContentfulStatusCode } from 'hono/utils/http-status';
 import { ZodError } from 'zod';
 import { logger } from './logger.js';
 
 export class ApiError extends Error {
   constructor(
-    public statusCode: number,
+    public statusCode: ContentfulStatusCode,
     message: string,
     public code?: string,
     public details?: unknown
@@ -49,7 +49,7 @@ export function errorHandler() {
               message: e.message,
             })),
           },
-        }, 400 as StatusCode);
+        }, 400);
       }
 
       // Handle custom API errors
@@ -62,7 +62,7 @@ export function errorHandler() {
             message: error.message,
             details: error.details,
           },
-        }, error.statusCode as StatusCode);
+        }, error.statusCode);
       }
 
       // Handle Hono HTTP exceptions
@@ -84,7 +84,7 @@ export function errorHandler() {
           code: 'INTERNAL_ERROR',
           message: 'An unexpected error occurred',
         },
-      }, 500 as StatusCode);
+      }, 500);
     }
   };
 }
